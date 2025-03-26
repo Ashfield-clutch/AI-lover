@@ -1,0 +1,15 @@
+[phases.setup]
+nixPkgs = [
+  "python311",
+  "gcc",
+  "gfortran",
+  "lapack",
+  "libblas",
+  "liblapack",
+  "python311Packages.pip",
+  "python311Packages.setuptools",
+  "python311Packages.wheel",
+  "python311Packages.numpy",
+  "openblas",          # For optimized matrix calculations
+  "atlas",             # For optimized linear algebra
+]
