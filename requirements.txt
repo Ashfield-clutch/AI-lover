@@ -1,0 +1,17 @@
+python-telegram-bot==20.7
+openai==1.3.0
+elevenlabs==0.2.24
+stability-sdk==0.8.3
+Pillow==10.1.0
+python-dotenv==1.0.0
+transformers==4.35.0
+torch==2.1.0
+numpy==1.24.3
+scikit-learn==1.3.0
+
+BOT_TOKEN=你的Telegram机器人token
+OPENAI_API_KEY=你的OpenAI API密钥
+ELEVENLABS_API_KEY=你的ElevenLabs API密钥
+STABILITY_API_KEY=你的Stability AI API密钥
+
+✅ AI 女友上线喵~
