@@ -5,7 +5,7 @@ import openai
 
 class EmotionAnalyzer:
     def __init__(self):
-        self.sentiment_analyzer = pipeline("sentiment-analysis", model="uer/roberta-base-chinese-sentiment")
+        self.sentiment_analyzer = pipeline("sentiment-analysis", model="uer/roberta-base-finetuned-dianping-chinese")
         self.emotion_categories = {
             "positive": ["开心", "快乐", "喜欢", "爱", "好", "棒", "优秀", "完美"],
             "negative": ["难过", "伤心", "讨厌", "恨", "坏", "差", "糟糕", "失败"],
