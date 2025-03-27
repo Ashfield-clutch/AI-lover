@@ -16,11 +16,18 @@ class EmotionAnalyzer:
             "love": ["爱", "喜欢", "爱慕", "心动", "甜蜜"],
             "anxiety": ["焦虑", "担心", "害怕", "紧张", "不安"]
         }
-        
+
     def analyze_text(self, text):
         # 使用RoBERTa进行情感分析
         sentiment_result = self.sentiment_analyzer(text)[0]
-        
+
+        # ✅ 映射标签为语义结果
+        label_map = {
+            "LABEL_0": "negative",
+            "LABEL_1": "positive"
+        }
+        sentiment_result["label"] = label_map.get(sentiment_result["label"], "neutral")
+
         # 使用GPT进行更细致的情绪分析
         prompt = f"""
         分析以下文本中的情绪，返回一个JSON格式的结果，包含以下字段：
@@ -28,10 +35,10 @@ class EmotionAnalyzer:
         - intensity: 情绪强度（1-5的整数）
         - secondary_emotions: 次要情绪列表
         - suggested_response: 建议的回应方式
-        
+
         文本：{text}
         """
-        
+
         try:
             response = openai.ChatCompletion.create(
                 model=GPT_MODEL,
@@ -53,12 +60,12 @@ class EmotionAnalyzer:
                     "suggested_response": "保持友好和关心"
                 }
             }
-    
+
     def get_emotional_response(self, emotion_data):
         """根据情绪分析结果生成合适的回应"""
         dominant = emotion_data["emotion_analysis"]["dominant_emotion"]
         intensity = emotion_data["emotion_analysis"]["intensity"]
-        
+
         response_templates = {
             "positive": {
                 1: "主人看起来心情不错呢~",
@@ -103,5 +110,5 @@ class EmotionAnalyzer:
                 5: "主人别担心，我会一直陪着你喵~"
             }
         }
-        
-        return response_templates.get(dominant, {}).get(intensity, "主人我在这里喵~") 
+
+        return response_templates.get(dominant, {}).get(intensity, "主人我在这里喵~")
